@@ -10,7 +10,7 @@ detector = HandDetector(maxHands=1)
 offset = 20
 imgSize = 300
  
-folder = "Photos/A"
+folder = "Data/Z"
 counter = 0
  
 while True:
@@ -43,8 +43,8 @@ while True:
             hGap = math.ceil((imgSize - hCal) / 2)
             imgWhite[hGap:hCal + hGap, :] = imgResize
  
-        cv2.imshow("ImageCrop", imgCrop)
-        cv2.imshow("ImageWhite", imgWhite)
+        #cv2.imshow("ImageCrop", imgCrop)
+        #cv2.imshow("ImageWhite", imgWhite)
  
     cv2.imshow("Image", img)
     key = cv2.waitKey(1)

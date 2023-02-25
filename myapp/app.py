@@ -4,19 +4,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('/templates/home.html')
+    return render_template('home.html')
 
-@app.route('/about')
+@app.route('/translate')
 def about_page():
-    return "about"
+    return render_template("translate.html")
 
-@app.route('/dashboard')
+@app.route('/levels')
 def dashboard_page():
-    return "dashboard"
-
-@app.route('/contact')
-def contact_page():
-    return "contact"
+    return "levels"
 
 if __name__ == '__main__':
     app.run()

@@ -1,5 +1,6 @@
 from flask import Flask, Response, render_template
-
+import cv2
+import ffmpeg
 from SignScanner import get_video_stream, getPrediction
 
 app = Flask(__name__)
@@ -8,8 +9,9 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
+
 @app.route('/translate')
-def about_page():
+def translate_page():
     prediction = getPrediction()
     return render_template("translate.html", prediction = prediction)
 

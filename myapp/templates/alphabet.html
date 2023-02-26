@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-    
+	<link rel="stylesheet" type="text/css" href="static/css/alphabet.css"> 
 </head>
 <body>
-	<h1>Guess the Animal</h1>
-	<p>Can you guess the name of the animal in the picture?</p>
-	<img id="animal-image" src="{{ url_for('static', filename=image_filename) }}">
+	<div style="text-align: center;">
+	<h1>What is the Letter?</h1>
+	<img id="game-image" src="{{ url_for('static', filename=image_filename) }}">
 	<form method="post" action="{{ url_for('guess') }}">
-		<label for="guess-input">Enter your guess:</label>
 		<input id="guess-input" name="guess" type="text" placeholder="Enter your guess...">
 		<input type="hidden" name="animal" value="{{ animal }}">
 		<button id="submit-button" type="submit">Submit</button>
 	</form>
 	<p id="result-message">{{ message }}</p>
+</div>
 </body>
 </html>

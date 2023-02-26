@@ -7,7 +7,6 @@ body {
  
  header {
 	border: 10px solid #333333;
-	padding: 1rem;
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	font-size: 50px;
@@ -22,8 +21,6 @@ body {
 	padding: 0;
 	display: flex;
 	justify-content: center;
-	background-color: #FFB6C1;
-   
  }
  
  a {
@@ -36,11 +33,16 @@ body {
   
  
  nav li {
+	background-color: #FFB6C1;
+
+	text-align: center;
 	margin: 10 20px;
  }
  
  
  nav li a {
+	border: 10px solid #333333;
+	text-align: center;
 	display: block;
 	padding: 10px;
 	color: white;
@@ -68,8 +70,10 @@ body {
  
  
  ul {
+	text-align: center;
 	margin: 0;
 	padding: 0;
+	font-size: 20px;
 	list-style: none;
  }
  

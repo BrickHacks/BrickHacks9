@@ -12,23 +12,24 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    print('home')
     return render_template('home.html')
 
 
 @app.route('/translate')
 def translate_page():
     prediction = getPrediction()
+    print("pred" + prediction)
     return render_template("translate.html", prediction = prediction)
-
-
 
 @app.route('/video_feed')
 def video_feed():
-
+    print('videofeed')
     return Response(get_video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/levels')
 def dashboard_page():
+    print('levels')
     return render_template("levels.html")
 
 

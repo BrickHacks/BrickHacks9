@@ -18,7 +18,7 @@ def get_video_stream():
     while True:
         success, img = cap.read()
         imgOutput = img.copy()
-        imgOutput = cv2.flip(img,1)
+        
         hands, img = detector.findHands(img)
         if hands:
             hand = hands[0]
@@ -36,22 +36,28 @@ def get_video_stream():
                 wGap = math.ceil((imgSize - wCal) / 2)
                 imgWhite[:, wGap:wCal + wGap] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=False)
-    
+                
+                
             else:
                 k = imgSize / w
                 hCal = math.ceil(k * h)
                 if imgCrop is not None:
-                
-                    imgResize = cv2.resize(imgCrop,(imgSize, hCal))
-        
-              #  imgResize = cv2.resize(imgCrop, (imgSize, hCal))
+                    imgResize = cv2.resize(imgCrop,(imgSize, hCal))        
                 hGap = math.ceil((imgSize - hCal) / 2)
                 imgWhite[hGap:hCal + hGap, :] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=False)
+            
+            cv2.rectangle(imgOutput, (x-offset, y-offset), (x + w+offset, y + h+offset), (255, 0, 255), 4)
+            imgOutput = cv2.flip(imgOutput,1)
+            cv2.rectangle(imgOutput, (290, 460), (345, 410), (255, 0, 255), cv2.FILLED)
+            cv2.putText(imgOutput, labels[index], (300, 480 -26), cv2.FONT_HERSHEY_COMPLEX, 1.7, (255, 255, 255), 2)
+            print(x)
+            print(y)
+            
             officialPrediction = labels[index]
         else:
             officialPrediction = ""
-            
+            imgOutput = cv2.flip(imgOutput,1)
         ret, imgOutput = cv2.imencode('.jpg', imgOutput)
 
         # Convert the JPEG buffer to bytes and yield it to Flask

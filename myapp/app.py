@@ -48,9 +48,8 @@ def home():
 
 @app.route('/translate')
 def translate_page():
-    prediction = getPrediction()
-    print("pred" + prediction)
-    return render_template("translate.html", prediction = prediction)
+    print('translate')
+    return render_template("translate.html")
 
 @app.route('/video_feed')
 def video_feed():

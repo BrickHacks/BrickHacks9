@@ -11,6 +11,8 @@
 </head>
 <body>
 	<div style="text-align: center;">
+	<button onclick="home()"> Home</button>
+		
 	<h1>What is the Letter?</h1>
 	<img id="game-image" src="{{ url_for('static', filename=image_filename) }}">
 	<form method="post" action="{{ url_for('guess') }}">

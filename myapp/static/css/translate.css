@@ -3,6 +3,16 @@ body {
 	color: white;
 	font-family: Arial, sans-serif;
 }
+ 
+header {
+	border: 10px solid #333333;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	font-size: 50px;
+	background-color: #FFB6C1;
+  margin-bottom: 50px;
+ }
+ 
   
   .container {
     width: 100%;
@@ -53,3 +63,54 @@ body {
     color: white;
   }
   
+  img{
+    max-width: 650px;
+    width:  100%;
+  }
+  main {
+    padding: 20px;
+   }
+   
+ 
+  
+ nav li {
+	background-color: #FFB6C1;
+	margin: 10 20px;
+ }
+ 
+ 
+ nav li a {
+	border: 10px solid #333333;
+	display: block;
+	padding: 10px;
+	color: white;
+	text-decoration: none;
+ }
+ 
+ 
+ nav li a:hover {
+	background-color: #f87185;
+ }
+  
+ nav ul {
+	list-style: none;
+	font-size: 100px;
+	margin: 0;
+	padding: 0;
+	display: flex;
+ }
+ 
+ a {
+	display: block;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 1rem;
+	transition: background-color 0.2s ease-in-out;
+  }
+  ul {
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	list-style: none;
+ }
+ 

@@ -7,17 +7,17 @@
 <body>
   <div class="container">
     <div class="center-box">
-      <h1>Sign Here: </h1>
-        <img src="data:image/jpeg;base64,{{ image }}" alt="User's webcam">
+      <h1>Sign Here: </h1>  
+      <img style = "align-items: center" id="video_feed" src="{{ url_for('video_feed') }}">
     </div>
   </div>
-
+  
 
   <div class="container">
     <div class="center-box">
       <form>
-        <label for="name">Translation:</label>
-        <input type="text" id="name" name="name">
+        <label for="name">Translation: {{ prediction }} </label>
+        <input type="text" id="name" name="name" placeholder = {{prediction}}>
       </form>
     </div>
   </div>

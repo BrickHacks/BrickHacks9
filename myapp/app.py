@@ -10,6 +10,7 @@ from pytz import timezone
 app = Flask(__name__)
 
 score = 0
+bet = 0
 message = "How many points do you want to bet?"
 signImages = {
 	"A": "/css/letters/A.png",
@@ -63,14 +64,15 @@ def dashboard_page():
 
     
 @app.route('/alphabet', methods=['POST', 'GET'])
-def guess( bet = 0):
+def guess( ):
     global score
     global message
+    
     if request.method == 'GET':
         animal, image_filename = random.choice(list(signImages.items()))
         return render_template('alphabet.html', image_filename=image_filename, animal=animal, score=score, message = message)
 
-     
+    bet = int(request.form['points'])
     # Get the guessed animal from the form
     guessed_animal = request.form['guess']
 
@@ -81,12 +83,18 @@ def guess( bet = 0):
     if guessed_animal.lower() == actual_animal.lower():
         message = "Congratulations, you guessed it! Want to push your luck some more?"
         score += bet
+        print(bet)
+        print("scorePlus")
+        print(score)
+
     else:
         message = "Sorry, that's not the right answer. Try again!"
         if score - bet >= 0:
             score -= bet
         else:
             score = 0
+    print("score")
+    print(score)
 
     # Get a new random animal and its image filename
     animal, image_filename = random.choice(list(signImages.items()))

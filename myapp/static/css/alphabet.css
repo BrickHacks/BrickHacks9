@@ -59,3 +59,50 @@ p {
 	color: white;
 
  }
+  
+ nav li {
+	background-color: #FFB6C1;
+
+	text-align: center;
+	margin: 10 20px;
+ }
+ 
+ 
+ nav li a {
+	border: 10px solid #333333;
+	text-align: center;
+	display: block;
+	padding: 10px;
+	color: white;
+	text-decoration: none;
+ }
+ 
+ 
+ nav li a:hover {
+	background-color: #f87185;
+ }
+  
+ nav ul {
+	list-style: none;
+	font-size: 100px;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+ }
+ 
+ a {
+	display: block;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 1rem;
+	transition: background-color 0.2s ease-in-out;
+  }
+  ul {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	list-style: none;
+ }
+ 

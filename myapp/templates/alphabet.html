@@ -11,8 +11,10 @@
 </head>
 <body>
 	<div style="text-align: center;">
-	<button onclick="home()"> Home</button>
-		
+		<ul>
+			<li><a href="/">Home</a></li>
+	
+		</ul>
 	<h1>What is the Letter?</h1>
 	<img id="game-image" src="{{ url_for('static', filename=image_filename) }}">
 	<form method="post" action="{{ url_for('guess') }}">
@@ -21,8 +23,8 @@
 		
 		<p>Score: {{score}}</p>
 		<p id="result-message">{{ message }}</p>
-		<button onclick="guess(1)">Bet 1 Point</button>
-		<button onclick="guess(5)">Bet 5 Points</button>
+		<button name="points" value="{{1}}" onclick="guess()">Bet 1 Point</button>
+		<button name="points" value="{{5}}"onclick="guess()">Bet 5 Points</button>
 	</form>
 	
 </div>

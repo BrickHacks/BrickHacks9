@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<link rel="stylesheet" type="text/css" href="static/css/alphabet.css"> 
+	<title>Game Scoring</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function updateScore(points) {
+            $.post('/update_score', {points: points});
+        }
+    </script>
 </head>
 <body>
 	<div style="text-align: center;">
@@ -9,7 +16,10 @@
 	<form method="post" action="{{ url_for('guess') }}">
 		<input id="guess-input" name="guess" type="text" placeholder="Enter your guess...">
 		<input type="hidden" name="animal" value="{{ animal }}">
-		<button id="submit-button" type="submit">Submit</button>
+		
+		<p>Score: {{score}}</p>
+		<button onclick="updateScore(1)">Add 1 point</button>
+		<button onclick="updateScore(5)">Add 5 points</button>
 	</form>
 	<p id="result-message">{{ message }}</p>
 </div>

@@ -1,5 +1,5 @@
 import random
-from flask import Flask, Response, render_template, request
+from flask import Flask, Response, redirect, render_template, request, session
 import cv2
 import ffmpeg
 from SignScanner import get_video_stream, getPrediction
@@ -15,6 +15,17 @@ app = Flask(__name__)
 def home():
     print('home')
     return render_template('home.html')
+
+score = 0
+
+
+@app.route('/update_score', methods=['POST'])
+def update_score():
+    global score
+    score += int(request.form['points'])
+    print('score')
+    print(score)
+    return render_template('alphabet.html', score=score)
 
 
 @app.route('/translate')
@@ -68,7 +79,7 @@ def index():
     # Get a random animal and its image filename
     animal, image_filename = random.choice(list(animals.items()))
 
-    return render_template('alphabet.html', image_filename=image_filename, animal=animal)
+    return render_template('alphabet.html', image_filename=image_filename, animal=animal, score=score)
 
 @app.route('/guess', methods=['POST'])
 def guess():
@@ -86,7 +97,7 @@ def guess():
     # Get a new random animal and its image filename
     animal, image_filename = random.choice(list(animals.items()))
 
-    return render_template('alphabet.html', image_filename=image_filename, animal=animal, message=message)
+    return render_template('alphabet.html', image_filename=image_filename, animal=animal, message=message, score=score)
 
 
 
@@ -114,6 +125,7 @@ scheduler.start()
 
 
 if __name__ == '__main__':
+    app.secret_key = 'mysecretkey'
     app.run()
     
     

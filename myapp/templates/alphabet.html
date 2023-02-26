@@ -18,10 +18,11 @@
 		<input type="hidden" name="animal" value="{{ animal }}">
 		
 		<p>Score: {{score}}</p>
-		<button onclick="updateScore(1)">Add 1 point</button>
-		<button onclick="updateScore(5)">Add 5 points</button>
+		<p id="result-message">{{ message }}</p>
+		<button onclick="guess(1)">Bet 1 Point</button>
+		<button onclick="guess(5)">Bet 5 Points</button>
 	</form>
-	<p id="result-message">{{ message }}</p>
+	
 </div>
 </body>
 </html>

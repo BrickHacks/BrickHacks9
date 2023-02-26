@@ -1,7 +1,5 @@
 import random
 from flask import Flask, Response, redirect, render_template, request, session
-import cv2
-import ffmpeg
 from SignScanner import get_video_stream, getPrediction
 from twilio.rest import Client
 # import json
@@ -11,40 +9,9 @@ from pytz import timezone
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    print('home')
-    return render_template('home.html')
-
 score = 0
-
-
-@app.route('/update_score', methods=['POST'])
-def update_score():
-    global score
-    score += int(request.form['points'])
-    print('score')
-    print(score)
-    return render_template('alphabet.html', score=score)
-
-
-@app.route('/translate')
-def translate_page():
-    prediction = getPrediction()
-    print("pred" + prediction)
-    return render_template("translate.html", prediction = prediction)
-
-@app.route('/video_feed')
-def video_feed():
-    print('videofeed')
-    return Response(get_video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/levels')
-def dashboard_page():
-    print('levels')
-    return render_template("levels.html")
-
-animals = {
+message = "How many points do you want to bet?"
+signImages = {
 	"A": "/css/letters/A.png",
 	"B": "/css/letters/B.png",
 	"C": "/css/letters/C.png",
@@ -73,33 +40,59 @@ animals = {
     "Z": "/css/letters/z.png"
 }
 
-@app.route('/alphabet')
-def index():
-    print('here')
-    # Get a random animal and its image filename
-    animal, image_filename = random.choice(list(animals.items()))
 
-    return render_template('alphabet.html', image_filename=image_filename, animal=animal, score=score)
+@app.route('/')
+def home():
+    print('home')
+    return render_template('home.html')
 
-@app.route('/guess', methods=['POST'])
-def guess():
+@app.route('/translate')
+def translate_page():
+    prediction = getPrediction()
+    print("pred" + prediction)
+    return render_template("translate.html", prediction = prediction)
+
+@app.route('/video_feed')
+def video_feed():
+    print('videofeed')
+    return Response(get_video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/levels')
+def dashboard_page():
+    print('levels')
+    return render_template("levels.html")
+
+    
+@app.route('/alphabet', methods=['POST', 'GET'])
+def guess( bet = 0):
+    global score
+    global message
+    if request.method == 'GET':
+        animal, image_filename = random.choice(list(signImages.items()))
+        return render_template('alphabet.html', image_filename=image_filename, animal=animal, score=score, message = message)
+
+     
     # Get the guessed animal from the form
     guessed_animal = request.form['guess']
 
     # Get the actual animal from the form
     actual_animal = request.form['animal']
-
+    #test = int(request.form['points'])
+    #print(test)
     if guessed_animal.lower() == actual_animal.lower():
-        message = "Congratulations, you guessed it!"
+        message = "Congratulations, you guessed it! Want to push your luck some more?"
+        score += bet
     else:
         message = "Sorry, that's not the right answer. Try again!"
+        if score - bet >= 0:
+            score -= bet
+        else:
+            score = 0
 
     # Get a new random animal and its image filename
-    animal, image_filename = random.choice(list(animals.items()))
+    animal, image_filename = random.choice(list(signImages.items()))
 
     return render_template('alphabet.html', image_filename=image_filename, animal=animal, message=message, score=score)
-
-
 
 def sendMessage():
     # this is for hiding auth token

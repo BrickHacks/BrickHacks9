@@ -7,6 +7,7 @@ from twilio.rest import Client
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from pytz import timezone
+from game import index
 
 app = Flask(__name__)
 
@@ -31,6 +32,10 @@ def video_feed():
 def dashboard_page():
     print('levels')
     return render_template("levels.html")
+
+@app.route('/alphabet')
+def alphabet_page():
+    index()
 
 
 def sendMessage():

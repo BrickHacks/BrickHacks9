@@ -20,8 +20,11 @@ def translate_page():
     prediction = getPrediction()
     return render_template("translate.html", prediction = prediction)
 
+
+
 @app.route('/video_feed')
 def video_feed():
+
     return Response(get_video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/levels')

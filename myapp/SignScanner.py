@@ -7,9 +7,9 @@ import math
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
 classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
-officialPrediction = "what the fuck"
+officialPrediction = "initial message"
 offset = 20
-imgSize = 300
+imgSize = 500
  
 
 def get_video_stream():
@@ -18,14 +18,15 @@ def get_video_stream():
     while True:
         success, img = cap.read()
         imgOutput = img.copy()
+        imgOutput = cv2.flip(img,1)
         hands, img = detector.findHands(img)
         if hands:
             hand = hands[0]
             x, y, w, h = hand["bbox"]
     
             imgWhite = np.ones((imgSize, imgSize, 3), np.uint8) * 255
-            imgCrop = img[y - offset:y + h + offset, x - offset:x + w + offset]
-    
+            #imgCrop = img[y - offset:y + h + offset, x - offset:x + w + offset]
+            imgCrop = img[50:450, 0:640]  
             aspectRatio = h / w
     
             if aspectRatio > 1:
@@ -39,7 +40,11 @@ def get_video_stream():
             else:
                 k = imgSize / w
                 hCal = math.ceil(k * h)
-                imgResize = cv2.resize(imgCrop, (imgSize, hCal))
+                if imgCrop is not None:
+                
+                    imgResize = cv2.resize(imgCrop,(imgSize, hCal))
+        
+              #  imgResize = cv2.resize(imgCrop, (imgSize, hCal))
                 hGap = math.ceil((imgSize - hCal) / 2)
                 imgWhite[hGap:hCal + hGap, :] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=False)

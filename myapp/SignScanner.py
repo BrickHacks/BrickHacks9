@@ -6,7 +6,7 @@ import math
  
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
-classifier = Classifier("./BrickHacks9/Model/keras_model.h5", "./BrickHacks9/Model/labels.txt")
+classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
 officialPrediction = "initial message"
 offset = 20
 imgSize = 500
@@ -14,7 +14,7 @@ imgSize = 500
 
 def get_video_stream():
     labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    officialPrediction = "nope"
+   # officialPrediction = "nope"
     while True:
         success, img = cap.read()
         imgOutput = img.copy()
@@ -49,6 +49,7 @@ def get_video_stream():
                 imgWhite[hGap:hCal + hGap, :] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=False)
             officialPrediction = labels[index]
+            print(officialPrediction)
         else:
             officialPrediction = ""
             
@@ -56,10 +57,8 @@ def get_video_stream():
 
         # Convert the JPEG buffer to bytes and yield it to Flask
         yield b'--frame\r\nContent-Type: image/jpeg\r\n\r\n' + imgOutput.tobytes() + b'\r\n'
-
-        
         cv2.waitKey(1)
-    cap.release()
-
+    
 def getPrediction():
+    print("access" + officialPrediction)
     return officialPrediction

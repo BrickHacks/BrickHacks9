@@ -53,4 +53,4 @@ while True:
         cv2.imwrite(f'{folder}/Image_{time.time()}.jpg',imgWhite)
         if not cv2.imwrite(f'{folder}/Image_{time.time()}.jpg',imgWhite):
             raise Exception("not saving")
-        print(counter)
+        print(counter) 

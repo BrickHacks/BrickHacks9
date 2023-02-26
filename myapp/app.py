@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 from SignScanner import get_video_stream, getPrediction
 from twilio.rest import Client
-import json
+# import json
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 from pytz import timezone

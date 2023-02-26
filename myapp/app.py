@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from SignScanner import get_video_stream, getPrediction
 from twilio.rest import Client
 import json
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -13,7 +14,12 @@ def home():
 
 @app.route('/translate')
 def about_page():
-    return render_template("translate.html")
+    prediction = getPrediction()
+    return render_template("translate.html", prediction = prediction)
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(get_video_stream(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/levels')
 def dashboard_page():

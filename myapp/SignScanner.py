@@ -6,7 +6,7 @@ import math
  
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
-classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
+classifier = Classifier("./BrickHacks9/Model/keras_model.h5", "./BrickHacks9/Model/labels.txt")
 officialPrediction = "initial message"
 offset = 20
 imgSize = 500

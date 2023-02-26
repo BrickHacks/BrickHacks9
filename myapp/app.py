@@ -12,7 +12,8 @@ def about_page():
 
 @app.route('/levels')
 def dashboard_page():
-    return "levels"
+    return render_template("levels.html")
+
 
 if __name__ == '__main__':
     app.run()

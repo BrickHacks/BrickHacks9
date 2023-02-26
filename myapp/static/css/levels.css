@@ -1,0 +1,25 @@
+body {
+	background-color: black;
+	color: white;
+	font-family: Arial, sans-serif;
+    text-align: center;
+    
+}
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    height: 100vh;
+  }
+  
+  .button-container button {
+    background-color: #FFB6C1;
+    border: none;
+    padding: 10px 1000px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 50px;
+    color: #000000;
+  }

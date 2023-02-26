@@ -29,7 +29,8 @@ def video_feed():
 
 @app.route('/levels')
 def dashboard_page():
-    return "levels"
+    return render_template("levels.html")
+
 
 def sendMessage():
     # this is for hiding auth token

@@ -3,7 +3,10 @@ from cvzone.HandTrackingModule import HandDetector
 from cvzone.ClassificationModule import Classifier
 import numpy as np
 import math
- 
+from flask import Flask, render_template
+import base64
+
+app = Flask(__name__)
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
 classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
@@ -60,6 +63,13 @@ while True:
  
         #cv2.imshow("ImageCrop", imgCrop)
         #cv2.imshow("ImageWhite", imgWhite)
- 
-    cv2.imshow("Image", imgOutput)
+
+    with open(img, "rb") as image_file:
+        image_bytes = image_file.read()
+
+    # Encode the byte array as a base64 string
+    image_base64 = base64.b64encode(image_bytes).decode("utf-8")
+
+    render_template('translate.html', image=image_base64)
+    
     cv2.waitKey(1)
